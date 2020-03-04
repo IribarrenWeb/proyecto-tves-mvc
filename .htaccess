@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    
+    RewriteEngine on
+    ErrorDocument 404 http://tves-proyecto.com/error/render
+    
+    RewriteCond %{SCRIPT_FILENAME} !-d
+    RewriteCond %{SCRIPT_FILENAME} !-f
+
+    RewriteRule ^(.*)/(.*) index.php?c=$1&m=$2
+
+</IfModule>
