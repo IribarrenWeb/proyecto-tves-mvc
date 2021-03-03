@@ -12,12 +12,11 @@ if (isset($_POST['option'])) {
 
 require_once $append . 'config/db.php';
 require_once $append . 'helpers/utils.php';
-require_once $append . 'models/equipos.php';
+require_once $append . 'models/Equipos.php';
 require_once $append . 'models/modificaciones.php';
 
 class EquipoController
 {
-
 	public static function index()
 	{
 
@@ -28,6 +27,7 @@ class EquipoController
 
 	public static function agregar()
 	{
+		Utils::isAuthorize();
 		require_once 'views/equipos/agregar.php';
 	}
 
@@ -49,8 +49,7 @@ class EquipoController
 
 	public static function save()
 	{
-
-		// Utils::isAdmin();
+		Utils::isAuthorize();
 
 		$marca = (int) Utils::issetPost($_POST['marca'], 'number');
 		$departamento = (int) Utils::issetPost($_POST['departamento'], 'number');
@@ -195,16 +194,14 @@ class EquipoController
 
 					$valor = $valor == 1 ? 'true' : 'false';
 
-					$estatus = "Se le asigno un nuevo estatus al equipo. Anterior estatus: <strong>" . $equipoAfter['estatus'] == 1 ? 'Activo' : 'Inactivo' . '</strong>' ;
+					$estatus = $equipoAfter['estatus'] == 1 ? 'Activo' : 'Inactivo'; 
+					$descripcion = "Se le asigno un nuevo <strong>estatus</strong> al equipo. Anterior estatus: <strong>{$estatus}</strong>";
 					
 					// Actualizar cambios
 					$equipoBefore = new Equipo;
 					$equipoBefore->setId($id);
 					$equipoBefore->setEstatus($valor);
 					$result = $equipoBefore->update('estatus');
-					
-					// var_dump($result, $valor);
-					// die();
 
 					if($result)
 					{
@@ -212,7 +209,8 @@ class EquipoController
 						$modificacion = new Modificacion;
 						$modificacion->setUsuarioId($_SESSION['usuario']['id']);
 						$modificacion->setEquipoId($id);
-						$modificacion->setDescripcion($estatus);
+						$modificacion->setDescripcion($descripcion);
+						$modificacion->setFecha($fecha);
 
 						$resultMod = $modificacion->save();
 
@@ -269,33 +267,34 @@ class EquipoController
 
 		$id = Utils::issetPost($_POST['id'], 'number');
 
-		$returnData = [
-			'status' => true,
-			'message' => 'Equipo eliminado.'
-		];
-
 		if (!$id) {
 			$returnData = [
 				'status' => false,
-				'message' => 'El identificador es incorrecto o no existe.'
+				'message' => 'Problema con el dato enviado.'
 			];
 
 			echo json_encode($returnData);
 			return;
 		}
 
-		$equipo = new Equipo;
+		$equipo = Equipo::Find($id);
 
-		$equipo->setId($id);
+		if($equipo && is_array($equipo) && !$equipo['estatus']){
 
-		$queryResult = $equipo->delete();
-
-		if (!$queryResult) {
-			$returnData = [
-				'status' => false,
-				'message' => 'Fallo al eliminar el equipo'
-			];
+			$result = Equipo::delete($id);
+	
+			if (!$result) {
+				$returnData['message'] = 'Fallo al eliminar el equipo';
+			}else{
+				$returnData = [
+					'status' => true,
+					'message' => 'Equipo eliminado.'
+				];
+			}
+		}else{
+			$returnData['message'] = 'El equipo que quiere eliminar no tiene estatus inactivo';
 		}
+
 		echo json_encode($returnData);
 		return;
 
@@ -303,6 +302,7 @@ class EquipoController
 
 	public static function reporte()
 	{
+		Utils::isAuthorize();
 		if($_POST){
 
 			$tipo = Utils::issetPost($_POST['tipo']);

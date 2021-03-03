@@ -5,8 +5,7 @@
             <h4 class="page-title">Equipos</h4>
         </div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-            <!-- <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Upgrade
-                to Pro</a> -->
+            <!--   -->
             <ol class="breadcrumb">
                 <li><a href="#">Dashboard</a></li>
                 <li class="active">Pagina de equipos</li>
@@ -71,18 +70,24 @@
                 <a class="btn text-white btn-block btn-primary" data-toggle="modal" data-target="#estatus-modal">
                     Cambiar estatus
                 </a>
+                <a class="btn text-white btn-block btn-primary" data-toggle="modal" data-target="#reporte-modal">
+                    Emitir reporte del equipo
+                </a>
                 <?php
                     if(Utils::isAdmin(true)):
                 ?>
                     <a class="btn text-white btn-block btn-primary" data-toggle="modal" data-target="#registro-modal">
                         Ver registro de modificaciones
                     </a>
+                    <?php if(!$equipo['estatus']):?>
+                    <a class="btn text-white btn-block btn-danger" data-toggle="modal" data-target=".alert-modal">
+                        Eliminar registro
+                    </a>
                 <?php
+                        endif;
                     endif;
                 ?>
-                <a class="btn text-white btn-block btn-primary" data-toggle="modal" data-target="#reporte-modal">
-                    Emitir reporte del equipo
-                </a>
+                
             </div>
         </div>
     </div>
@@ -96,6 +101,7 @@
 require_once './views/equipos/modals/editar.php';
 if(Utils::isAdmin(true)){
     require_once './views/equipos/modals/registros.php';
-    require_once './views/equipos/modals/reporte.php';
+    require_once './views/equipos/modals/delete.php';
 }
+require_once './views/equipos/modals/reporte.php';
 require_once './views/equipos/modals/estatus.php';

@@ -96,7 +96,7 @@ class Modificacion extends DataBase {
 
 		}
 
-		return false;
+		return [false,$db->errorInfo()];
 
 	}
 

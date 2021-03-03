@@ -19,8 +19,8 @@
                 <div class="card-body">
                     <div class="d-flex no-block align-items-center">
                         <div>
-                            <h2>120</h2>
-                            <h6 class="text-info">News Feed</h6>
+                            <h2><?=$equipos?></h2>
+                            <h6 class="text-info">Equipos registrados</h6>
                         </div>
                         <div class="ml-auto">
                             <span class="text-info display-6"><i class="ti-notepad"></i></span>
@@ -34,8 +34,8 @@
                 <div class="card-body">
                     <div class="d-flex no-block align-items-center">
                         <div>
-                            <h2>150</h2>
-                            <h6 class="text-cyan">Invoices</h6>
+                            <h2><?=$usuarios?></h2>
+                            <h6 class="text-cyan">Usuarios registrados</h6>
                         </div>
                         <div class="ml-auto">
                             <span class="text-cyan display-6"><i class="ti-clipboard"></i></span>
@@ -44,13 +44,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
             <div class="card border-bottom shadow border-success">
                 <div class="card-body">
                     <div class="d-flex no-block align-items-center">
                         <div>
                             <h2>450</h2>
-                            <h6 class="text-success">Revenue</h6>
+                            <h6 class="text-success">Equipos activos</h6>
                         </div>
                         <div class="ml-auto">
                             <span class="text-success display-6"><i class="ti-wallet"></i></span>
@@ -65,7 +65,7 @@
                     <div class="d-flex no-block align-items-center">
                         <div>
                             <h2>100</h2>
-                            <h6 class="text-orange">Sales</h6>
+                            <h6 class="text-orange"></h6>
                         </div>
                         <div class="ml-auto">
                             <span class="text-orange display-6"><i class="ti-stats-down"></i></span>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 <!-- /.container-fluid -->

@@ -35,6 +35,52 @@ class Utils extends DataBase {
 
 	}
 
+	public static function isAuthorize($op = false) {
+		$sql = "SELECT nombre_rol FROM role WHERE id = {$_SESSION['usuario']['role_id']}";
+		$db = self::connect();
+		$query = $db->query($sql);
+		$nameRol = $query->fetch();
+
+		if (isset($_SESSION['usuario']) && ($nameRol[0] == 'ROLE_ADMIN' || $nameRol[0] == 'ROLE_USER_BIEN_NACIONAL')) {
+
+			return true;
+
+		} elseif($op){
+
+			return false;
+
+		}else{
+
+			ErrorController::render('No esta autorizado para realizar esta accion.');
+
+		}
+
+	}
+
+	public static function isRole($role) {
+		$sql = "SELECT nombre_rol FROM role WHERE id = {$_SESSION['usuario']['role_id']}";
+		$db = self::connect();
+		$query = $db->query($sql);
+		$nameRol = $query->fetch();
+
+		if($role == 'soporte'){
+			if(isset($_SESSION['usuario']) && $nameRol[0] === 'ROLE_USER_TECNOLOGIA'){
+				return true;
+			}else{
+				return false;
+			}
+		} elseif ($role === 'bien'){
+			if(isset($_SESSION['usuario']) && $nameRol[0] === 'ROLE_USER_BIEN_NACIONAL'){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+
+	}
+
 	public static function passwordVerify($password,$message = false){
 
 		$is_password = false;

@@ -116,7 +116,7 @@ class User extends DataBase
 		return $this;
 	}
 
-	public function All()
+	public static function All()
 	{
 
 		$sql = "SELECT id, nombre, apellido, documento, role_id, fecha_creacion, fecha_actualizacion FROM usuarios WHERE id != {$_SESSION['usuario']['id']} ORDER BY fecha_creacion DESC";

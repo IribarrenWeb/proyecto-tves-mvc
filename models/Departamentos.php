@@ -71,11 +71,11 @@ class Departamento extends DataBase {
 
 	}
 
-	public function edit() {
+	public function update() {
 
 		$db = DataBase::connect();
 
-		$sql = "UPDATE departamentos SET nombre = '{$this->name}', descripcion = '{$this->descripcion}' WHERE id = {$this->id}";
+		$sql = "UPDATE departamentos SET nombre = '{$this->nombre}', descripcion = '{$this->descripcion}' WHERE id = {$this->id}";
 
 		$query = $db->exec($sql);
 
@@ -105,6 +105,22 @@ class Departamento extends DataBase {
 
 		return false;
 
+	}
+
+	public function find($id) {
+		$db = DataBase::connect();
+
+		$sql = "SELECT * FROM departamentos WHERE id = {$id}";
+
+		$query = $db->prepare($sql);
+
+		try {
+			$query->execute();
+			$departamento = $query->fetch();
+			return $departamento;
+		} catch (\Throwable $th) {
+			return false;
+		}
 	}
 
 }

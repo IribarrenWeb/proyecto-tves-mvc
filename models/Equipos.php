@@ -114,7 +114,7 @@ class Equipo extends DataBase
 		return $db->errorInfo();
 	}
 
-	public function Find($id)
+	public static function Find($id)
 	{
 		$sql = "SELECT e.id, e.num_bien, e.estatus, e.fecha_incorporacion, d.id as d_id, d.nombre as departamento, 
 				d.descripcion as descripcion,mc.nombre as marca, m.nombre as modelo, m.ram, m.cpu
@@ -125,16 +125,18 @@ class Equipo extends DataBase
 
 		$query = $db->query($sql);
 
-		$equipo = false;
+		$rowCount = $query->rowCount();
 
-		if ($query && $query->rowCount() >= 1) {
+		$equipo = false;
+		
+		if ($rowCount == 1) {
 			$equipo = $query->fetch();
 		}
 
 		return $equipo;
 	}
 
-	public function All()
+	public static function All()
 	{
 
 		$sql = 'SELECT e.id, e.num_bien, e.estatus, e.fecha_incorporacion, d.id as d_id, d.nombre as departamento, 
@@ -151,14 +153,13 @@ class Equipo extends DataBase
 		return $equipos;
 	}
 
-	public function delete()
+	public function delete($id)
 	{
 
 		$db = self::connect();
 
-		$sql = "UPDATE public.equipos
-				SET estatus = false
-				WHERE id = {$this->id}";
+		$sql = "DELETE FROM public.equipos
+				WHERE id = {$id}";
 
 		$query = $db->exec($sql);
 
@@ -169,20 +170,6 @@ class Equipo extends DataBase
 		}
 
 		return false;
-	}
-
-	public static function getRand($limit)
-	{
-
-		$sql = "SELECT * FROM productos ORDER BY RAND() LIMIT $limit";
-
-		$db = self::connect();
-
-		$query = $db->query($sql);
-
-		$equipos = $query->fetchAll();
-
-		return $equipos;
 	}
 
 	public function update($option)

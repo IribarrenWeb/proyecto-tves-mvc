@@ -6,7 +6,7 @@
                 ¡Cambia la contraseña!
             </div>
             <div class="modal-body">
-                <form class="pl-3 pr-3 validate-form" id="pass-form" method="changePass" cont="user">
+                <form class="pl-3 pr-3 validate-form" id="pass-form" m="changePass" c="user">
 
                     <div class="form-group">
                         <label for="password">Contraseña nueva</label>

@@ -15,7 +15,8 @@ if (isset($_POST['option'])) {
 // Importacion de los archivos requeridos
 require_once $append . 'config/db.php';
 require_once $append . 'helpers/utils.php';
-require_once $append . 'models/usuarios.php';
+require_once $append . 'models/Usuarios.php';
+require_once $append . 'models/Equipos.php';
 
 class UserController
 {
@@ -42,6 +43,7 @@ class UserController
 	 */
 	public static function agregar()
 	{
+		Utils::isAdmin();
 		$roles = Utils::All('role')->fetchAll();
 
 		$roles = array_map(function ($item) {
@@ -60,6 +62,8 @@ class UserController
 	 */
 	public static function dashboard()
 	{
+		$equipos = count(Equipo::All());
+		$usuarios = count(User::All());
 		require_once './views/usuarios/dashboard.php';
 	}
 
@@ -71,6 +75,7 @@ class UserController
 	 */
 	public static function editar()
 	{
+		Utils::isAdmin();
 		$usuario = $_SESSION['usuario'];
 
 		require_once './views/usuarios/editar.php';
@@ -83,7 +88,7 @@ class UserController
 	 */
 	public static function registro()
 	{
-
+		Utils::isAdmin();
 		if (isset($_POST['option'])) {
 
 			// Assing the post params to variables
@@ -217,6 +222,7 @@ class UserController
 	 */
 	public static function update()
 	{
+		Utils::isAdmin();
 		// Recoger el parametro option y validarlo
 		$option = Utils::issetPost($_POST['update_op'], 'text');
 
@@ -389,6 +395,7 @@ class UserController
 	 */
 	public static function changePass()
 	{
+		Utils::isAdmin();
 		// Recepcion de los parametros enviados por POST
 		// y comprobacion de la igualdad de los passwords
 		// recibidos.
@@ -439,7 +446,7 @@ class UserController
 	
 	public static function resetPassword()
 	{
-		if(Utils::isAdmin()){
+		if(Utils::isAdmin(true)){
 
 			$user_id = Utils::issetPost($_POST['u_id'],'number');
 			$data_u = Utils::verifyExist($user_id,'usuarios','id');

@@ -5,8 +5,7 @@
             <h4 class="page-title">Departamentos</h4>
         </div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-            <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Upgrade
-                to Pro</a>
+             
             <ol class="breadcrumb">
                 <li><a href="#">Dashboard</a></li>
                 <li class="active">Agregar</li>
@@ -65,6 +64,7 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <button class="btn btn-primary">CREAR MODELO</button>
+                            <input class="btn btn-danger" type="reset" value="CANCELAR">
                         </div>
                     </div>
                 </form>

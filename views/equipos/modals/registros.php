@@ -19,36 +19,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php
-                        if(COUNT($registros) >= 1):
+                        <?php
+                        if (COUNT($registros) >= 1) :
                             $cont = 1;
                             foreach ($registros as $m) :
-                    ?>
-                            <tr>
-                                <th scope="row"><?=$cont?></th>
-                                <td class="text-capitalize font-bold">
-                                    <a href="<?=url_base?>user/detalle&u_id=<?=$m['usuario']['id']?>">
-                                        <?= $m['usuario']['nombre'] . ' ' . $m['usuario']['apellido'] ?>
-                                    </a>
-                                </td>
-                                <td><?= $m['descripcion'] ?></td>
-                                <td><?= date_format(date_create($m['fecha']),'d-m-Y') ?></td>
-                                <td><?= date_format(date_create($m['fecha']),'h:i a') ?></td>
-                            </tr>
-                    <?php
-                            $cont++;
+                        ?>
+                                <tr>
+                                    <th scope="row"><?= $cont ?></th>
+                                    <td class="text-capitalize font-bold">
+                                        <a href="<?= url_base ?>user/detalle&u_id=<?= $m['usuario']['id'] ?>">
+                                            <?= $m['usuario']['nombre'] . ' ' . $m['usuario']['apellido'] ?>
+                                        </a>
+                                    </td>
+                                    <td><?= $m['descripcion'] ?></td>
+                                    <td><?= date_format(date_create($m['fecha']), 'd-m-Y') ?></td>
+                                    <td><?= date_format(date_create($m['fecha']), 'h:i a') ?></td>
+                                </tr>
+                            <?php
+                                $cont++;
                             endforeach;
-                        else:
-                    ?>
-                        <tr class="text-center">
-                            <td colspan="4">No hay registros de modificaciones para este equipo</td>
-                        </tr>
-                    <?php
+                        else :
+                            ?>
+                            <tr class="text-center">
+                                <td colspan="4">No hay registros de modificaciones para este equipo</td>
+                            </tr>
+                        <?php
                         endif;
-                    ?>
+                        ?>
                     </tbody>
                 </table>
 
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-block btn-danger" data-dismiss="modal">Cerrar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

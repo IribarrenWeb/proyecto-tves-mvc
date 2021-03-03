@@ -16,64 +16,65 @@
                      <li>
                          <a href="<?= url_base ?>equipo/index" class="waves-effect link-collapse"><i class="fa  fa-list-alt fa-fw" aria-hidden="true"></i>Listado</a>
                      </li>
-                     <li>
-                         <a href="<?= url_base ?>equipo/agregar" class="waves-effect link-collapse"><i class="fa fa-plus-square-o fa-fw" aria-hidden="true"></i>Crear</a>
-                     </li>
+                     <?php if (Utils::isAdmin(true) || Utils::isRole('bien')) : ?>
+                         <li>
+                             <a href="<?= url_base ?>equipo/agregar" class="waves-effect link-collapse"><i class="fa fa-plus-square-o fa-fw" aria-hidden="true"></i>Crear</a>
+                         </li>
+                     <?php endif ?>
                  </ul>
              </li>
-             <li class="drop-link">
-                 <a href="#" class="waves-effect collapseble"><i class="fa fa-building-o fa-fw" aria-hidden="true"></i>Departamentos</a>
-                 <ul class="nav nav-drop">
-                     <li>
-                         <a href="<?= url_base ?>departamento/index" class="waves-effect link-collapse"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>Listado</a>
-                     </li>
-                     <li>
-                         <a href="<?= url_base ?>departamento/agregar" class="waves-effect link-collapse"><i class="fa fa-plus-square-o fa-fw" aria-hidden="true"></i>Crear</a>
-                     </li>
-                 </ul>
-             </li>
-<?php 
-                if(Utils::isAdmin(true)):
-?>
-             <li class="drop-link">
-                 <a href="#" class="waves-effect "><i class="fa fa-user fa-fw" aria-hidden="true"></i>Usuarios</a>
-                 <ul class="nav nav-drop">
-                     <li>
-                         <a href="<?= url_base ?>user/index" class="waves-effect link-collapse"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>Listado</a>
-                     </li>
-                     <li>
-                         <a href="<?= url_base ?>user/agregar" class="waves-effect link-collapse"><i class="fa fa-plus-square-o fa-fw" aria-hidden="true"></i>Crear</a>
-                     </li>
-                     <li>
-                         <a href="<?= url_base ?>user/editar" class="waves-effect link-collapse"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Editar perfil</a>
-                     </li>
-                 </ul>
-             </li>
-<?php
-    endif;
-?>
-             <li class="drop-link">
-                 <a href="#" class="waves-effect "><i class="fa fa-bookmark-o fa-fw" aria-hidden="true"></i>Marcas</a>
-                 <ul class="nav nav-drop">
-                     <li>
-                         <a href="<?= url_base ?>marca/index" class="waves-effect link-collapse"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>Listado</a>
-                     </li>
-                     <li>
-                         <a href="<?= url_base ?>marca/agregar" class="waves-effect link-collapse"><i class="fa fa-plus-square-o fa-fw" aria-hidden="true"></i>Crear</a>
-                     </li>
-                 </ul>
-             </li>
-             <li class="drop-link">
-                 <a href="<?= url_base ?>modelos/*" class="waves-effect "><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Modelos</a>
-                 <ul class="nav nav-drop">
-                     <li>
-                         <a href="<?= url_base ?>modelo/index" class="waves-effect link-collapse"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>Listado</a>
-                     </li>
-                     <li>
-                         <a href="<?= url_base ?>modelo/agregar" class="waves-effect link-collapse"><i class="fa fa-plus-square-o fa-fw" aria-hidden="true"></i>Crear</a>
-                     </li>
-                 </ul>
-             </li>
+
+             <?php if (Utils::isAdmin(true) || Utils::isRole('bien')) : ?>
+                 <li class="drop-link">
+                     <a href="#" class="waves-effect collapseble"><i class="fa fa-building-o fa-fw" aria-hidden="true"></i>Departamentos</a>
+                     <ul class="nav nav-drop">
+                         <li>
+                             <a href="<?= url_base ?>departamento/index" class="waves-effect link-collapse"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>Listado</a>
+                         </li>
+                         <li>
+                             <a href="<?= url_base ?>departamento/agregar" class="waves-effect link-collapse"><i class="fa fa-plus-square-o fa-fw" aria-hidden="true"></i>Crear</a>
+                         </li>
+                     </ul>
+                 </li>
+            <?php if (Utils::isAdmin(true)):?>
+                 <li class="drop-link">
+                     <a href="#" class="waves-effect "><i class="fa fa-user fa-fw" aria-hidden="true"></i>Usuarios</a>
+                     <ul class="nav nav-drop">
+                         <li>
+                             <a href="<?= url_base ?>user/index" class="waves-effect link-collapse"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>Listado</a>
+                         </li>
+                         <li>
+                             <a href="<?= url_base ?>user/agregar" class="waves-effect link-collapse"><i class="fa fa-plus-square-o fa-fw" aria-hidden="true"></i>Crear</a>
+                         </li>
+                         <li>
+                             <a href="<?= url_base ?>user/editar" class="waves-effect link-collapse"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>Editar perfil</a>
+                         </li>
+                     </ul>
+                 </li>
+            <?php endif ?>
+                 <li class="drop-link">
+                     <a href="#" class="waves-effect "><i class="fa fa-bookmark-o fa-fw" aria-hidden="true"></i>Marcas</a>
+                     <ul class="nav nav-drop">
+                         <li>
+                             <a href="<?= url_base ?>marca/index" class="waves-effect link-collapse"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>Listado</a>
+                         </li>
+                         <li>
+                             <a href="<?= url_base ?>marca/agregar" class="waves-effect link-collapse"><i class="fa fa-plus-square-o fa-fw" aria-hidden="true"></i>Crear</a>
+                         </li>
+                     </ul>
+                 </li>
+                 <li class="drop-link">
+                     <a href="<?= url_base ?>modelos/*" class="waves-effect "><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Modelos</a>
+                     <ul class="nav nav-drop">
+                         <li>
+                             <a href="<?= url_base ?>modelo/index" class="waves-effect link-collapse"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>Listado</a>
+                         </li>
+                         <li>
+                             <a href="<?= url_base ?>modelo/agregar" class="waves-effect link-collapse"><i class="fa fa-plus-square-o fa-fw" aria-hidden="true"></i>Crear</a>
+                         </li>
+                     </ul>
+                 </li>
+             <?php endif; ?>
          </ul>
          <div class="center p-20">
              <button class="btn btn-danger btn-block waves-effect waves-light logout">Salir</button>
